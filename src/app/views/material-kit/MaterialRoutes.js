@@ -6,12 +6,12 @@ const materialRoutes = [
         component: React.lazy(() => import('./tables/AppTable')),
     },
     {
-        path: '/material/form',
+        path: '/form',
         component: React.lazy(() => import('./forms/AppForm')),
     },
     {
-        path: '/material/buttons',
-        component: React.lazy(() => import('./buttons/AppButton')),
+        path: '/simpleform',
+        component: React.lazy(() => import('./forms/StepperForm')),
     },
     {
         path: '/material/icons',

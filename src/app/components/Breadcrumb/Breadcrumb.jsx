@@ -13,7 +13,7 @@ const Breadcrumb = ({ routeSegments }) => {
                     <h4 className="m-0 pb-3px ml-2 text-hint">|</h4>
                 </Hidden>
             ) : null}
-            {/* <Breadcrumbs
+            <Breadcrumbs
                 separator={<Icon className="text-hint">navigate_next</Icon>}
                 className="flex items-center relative"
             >
@@ -40,7 +40,7 @@ const Breadcrumb = ({ routeSegments }) => {
                           )
                       })
                     : null}
-            </Breadcrumbs> */}
+            </Breadcrumbs>
         </div>
     )
 }

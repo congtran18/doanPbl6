@@ -119,7 +119,7 @@ const TopSellingTable = () => {
                                 <TableCell className="px-0" colSpan={1}>
                                     <IconButton>
                                         <Icon color="primary">edit</Icon>
-                                    </IconButton>   
+                                    </IconButton>
                                 </TableCell>
                             </TableRow>
                         ))}

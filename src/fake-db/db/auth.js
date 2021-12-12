@@ -11,7 +11,7 @@ const userList = [
         name: 'Jason Alexander',
         username: 'jason_alexander',
         email: 'jason@ui-lib.com',
-        avatar: '/assets/images/face-6.jpg',
+        avatar: '/assets/images/d49985213831f16fa820 copy.jpg',
         age: 25,
     },
 ]
