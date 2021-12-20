@@ -21,18 +21,6 @@ const SimpleForm = () => {
         date: new Date(),
     })
 
-    useEffect(() => {
-        ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
-            console.log(value)
-
-            if (value !== state.password) {
-                return false
-            }
-            return true
-        })
-        return () => ValidatorForm.removeValidationRule('isPasswordMatch')
-    }, [state.password])
-
     const handleSubmit = (event) => {
         // console.log("submitted");
         // console.log(event);

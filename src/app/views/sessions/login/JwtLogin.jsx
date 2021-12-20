@@ -16,7 +16,7 @@ import useAuth from 'app/hooks/useAuth'
 
 const useStyles = makeStyles(({ palette, ...theme }) => ({
     cardHolder: {
-        background: '#1A2038',
+        background: '#f44336',
     },
     card: {
         maxWidth: 800,
@@ -70,7 +70,7 @@ const JwtLogin = () => {
         >
             <Card className={classes.card}>
                 <Grid container>
-                    <Grid item lg={5} md={5} sm={5} xs={12}>
+                    {/* <Grid item lg={5} md={5} sm={5} xs={12}>
                         <div className="p-8 flex justify-center items-center h-full">
                             <img
                                 className="w-200"
@@ -78,8 +78,8 @@ const JwtLogin = () => {
                                 alt=""
                             />
                         </div>
-                    </Grid>
-                    <Grid item lg={7} md={7} sm={7} xs={12}>
+                    </Grid> */}
+                    <Grid item lg={12} md={12} sm={12} xs={12}>
                         <div className="p-8 h-full bg-light-gray relative">
                             <ValidatorForm onSubmit={handleFormSubmit}>
                                 <TextValidator
@@ -140,7 +140,10 @@ const JwtLogin = () => {
                                     <div className="relative">
                                         <Button
                                             variant="contained"
-                                            color="primary"
+                                            style={{
+                                                backgroundColor: "#e91e63",
+                                                textColor: '#ffffff', 
+                                            }}
                                             disabled={loading}
                                             type="submit"
                                         >
@@ -157,6 +160,7 @@ const JwtLogin = () => {
                                     </div>
                                     <span className="mr-2 ml-5">or</span>
                                     <Button
+                                        color="red" variant="raised"
                                         className="capitalize"
                                         onClick={() =>
                                             history.push('/session/signup')
