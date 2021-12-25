@@ -1,13 +1,19 @@
 const express = require('express')
 const router = express.Router()
-const verifyToken = require('../middleware/auth')
+// const verifyToken = require('../middleware/auth')
 const { v4: uuidv4 } = require('uuid')
 // const fs =require('fs')
 const multer =require("multer")
 let path = require('path');
 const validate = require('../middleware/validate');
-const productController = require('../controllers/product.controller');
+// const productController = require('../controllers/product.controller');
+const {
+    categoryController,
+	productController,
+	typeController,
+} = require('../controllers/admin');
 const productValidation = require('../validations/product.validation');
+const protectRoute = require("../middleware/authMiddleware.js");
 
 const fileFilter = (req, file, cb) => {
 	const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
@@ -29,16 +35,31 @@ const storage = multer.diskStorage({
 let upload = multer({ storage, fileFilter, limits: { fileSize: 2 * 1024 * 1024 } });
 
 router.route('/')
-	  .get(verifyToken, validate(productValidation.getProducts), productController.getProduct)
-	  .post(verifyToken, upload.array('image', 6), validate(productValidation.postProduct), productController.postProduct)
+	  .get( productController.getProducts)
+	  .post( upload.array('image', 6), validate(productValidation.postProduct), productController.addProduct)
 
 router.route('/:id')
-	  .put(verifyToken, upload.array('image', 5), validate(productValidation.updateProduct), productController.putProduct)
-	  .delete(verifyToken, validate(productValidation.deleteProduct), productController.deleteProduct)
-	  .get(verifyToken, productController.findProduct)
+	  .put( upload.array('image', 5), validate(productValidation.updateProduct), productController.updateProduct)
+	  .delete(validate(productValidation.deleteProduct), productController.deleteProduct)
+	  .get(productController.getDetailProduct)
 
-router.get('/typeProduct/type', verifyToken, validate(productValidation.getTypeProduct), productController.getTypeProduct)
+router.route('/track-product/track').get(productController.getProductsTrack)
 
-router.get('/categoryProduct/category', verifyToken, validate(productValidation.getCategoryProduct), productController.getCategoryProduct)
+router.route('/track/:id').put(productController.trackProduct)
+
+router.route('/code/:code').get(productController.getCodeProduct)
+
+router.route("/:id/reviews").post(protectRoute, productController.createProductReview);
+
+router.get('/typeProduct/type', validate(productValidation.getTypeProduct), typeController.getTypes)
+
+router.route('/categoryProduct/category')
+	.get(validate(productValidation.getCategoryProduct), categoryController.getCategories)
+	.post( categoryController.addCategories)
+
+router.route('/categoryProduct/category/:id')
+	.get(categoryController.getDetailCategory)
+	.put(categoryController.updateCategory)
+	.delete( categoryController.deleteCategories)
 
 module.exports = router
